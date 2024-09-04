@@ -1,0 +1,30 @@
+body{
+  background-image : url("https://st3.depositphotos.com/13324256/17034/i/450/depositphotos_170344426-stock-photo-wooden-background.jpg");
+  background-position : center;
+  background-repeat : no-repeat;
+  background-size : cover;
+  background-attachment : fixed;
+  margin : 0;
+
+  /*Vertical alignment*/
+  display :flex;
+  justify-content : center;
+  min-height : 100vh;
+  align-items : center;
+
+}
+.clock-container{
+  backdrop-filter : blur(2px);
+  width : 100vw;
+  padding : 10px 0;
+
+}
+.clock{
+  color : white;
+  font-size : 6rem;
+  font-weight : bold;
+  font-family : monospace;
+  text-shadow : 3px 5px 5px hsla(0,0%,0%,0.75);
+  text-align : center;
+
+}
