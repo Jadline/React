@@ -21,10 +21,10 @@ function DigitalClock(){
 
         hours = hours % 12  || 12 
 
-        return `${padZero(hours)}:${padZero(minutes)}:${padZero(seconds)} ${meridian}`
+        return `${padZero(hours)}use:${padZero(minutes)}:${padZero(seconds)} ${meridian}`
     }
     function padZero(number){
-        return number < 10 ? `0${number}` : `${number}`c
+        return number < 10 ? `0${number}` : `${number}`
     }
     return(
         <div className="clock-container">
