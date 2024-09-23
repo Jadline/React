@@ -1,0 +1,86 @@
+* {
+  padding : 0;
+  margin : 0;
+  box-sizing : border-box;
+}
+body {
+  font-family : sans-serif;
+  color : #343a40;
+}
+.accordion {
+  width : 700px;
+  margin : 100px auto;
+  display : flex;
+  flex-direction : column;
+  gap : 20px;
+}
+.item {
+  box-shadow : 0 0 30px rgba(0,0,0,0.1);
+  padding : 20px 24px;
+  padding-right : 40px;
+  cursor : pointer;
+  /* border-top : 4px solid #fff; */
+  border-bottom : 4px solid #fff;
+  display : grid;
+  grid-template-columns : auto 1fr auto;
+  align-items: center;
+  background-color: #fff;
+  transition: background-color 0.3s ease;
+}
+.item:hover {
+  background-color: #f0f0f0; /* Slight background change on hover */
+}
+
+.number {
+  font-weight: bold;
+  color: #007bff; /* Blue color for the number */
+}
+
+.title {
+  font-size: 18px;
+  margin-left: 10px;
+  font-weight: bold;
+
+}
+
+.icon {
+  font-size: 24px;
+  font-weight: bold;
+  color: #007bff; /* Icon color matches the number */
+}
+
+.content-box {
+  grid-column: span 3; /* Make content take full width */
+  padding-top: 10px;
+  padding-bottom: 10px;
+  font-size: 20px;
+  color: #555;
+
+  transition: max-height 0.3s ease-out;
+}
+
+/* .item.active .content-box {
+  display: block;
+}*/
+
+/*.item.active {
+  border-top: 4px solid #007bff; /* Change top border color when active 
+} */
+
+/*.item .content-box {
+  overflow: hidden;
+  max-height: 0;
+  transition: max-height 0.3s ease-out;
+}
+
+.item.active .content-box {
+  max-height: 1000px;  Large value to ensure smooth expansion 
+}*/
+
+.additionalstyle {
+  border-top :4px solid  green;
+
+}
+.title-color {
+  color : green;
+}

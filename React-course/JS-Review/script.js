@@ -142,8 +142,9 @@ function getBooks() {
 function getBook(id) {
   return data.find((d) => d.id === id);
 }
+/*
 //destructuring
-const book = getBook(2)
+const book = getBook(3)
 book;
 // const title = book.title;
 // const author = book.author;
@@ -221,9 +222,99 @@ console.log(false || 'some string')
 console.log(book.translations.spanish)
 const spanishTranslation = book.translations.spanish || "not translated"
 spanishTranslation
-console.log(book.reviews.librarything.reviewsCount)
+// console.log(book.reviews.librarything.reviewsCount)
 
 
-//when its 0 
-const count = book.reviews.librarything.reviewsCount ?? "no data"
-count;
+// //when its 0 
+// const count = book.reviews.librarything.reviewsCount ?? "no data"
+// count;
+//to get the total reviews for the each book
+
+//optional chaining = if we are not sure of our data structure
+function getTotalReviewCount(book){
+  const goodreads = book.reviews?.goodreads?.reviewsCount;
+  const Librarything = book.reviews?.librarything?.reviewsCount ?? 0
+  return  goodreads + Librarything
+
+}
+console.log(getTotalReviewCount(book));
+*/
+
+//map,reduce,filter,sort
+//map = they dont mutate the new array they return a new array based on the new one
+const books = getBooks()
+
+//we want an array that has all the titles
+
+
+/*
+const bookTitles = books.map((book) => book.title)
+console.log(bookTitles)
+
+const essentialData = books.map((book) => ({title : book.title,author : book.author,reviewsCount : book.reviews?.goodreads?.reviewsCount ?? 0 + book.reviews?.librarything?.reviewsCount ?? 0 }))
+console.log(essentialData)
+
+
+//filter method 
+//gets an array based on a condition
+const longBooks = books.filter((book) => book.pages > 500).filter((book) => book.hasMovieAdaptation)
+console.log(longBooks)
+
+
+const adventureBooks = books.filter((book) => book.genres.includes("adventure")).map((book) => book.title)
+console.log(adventureBooks)
+
+//reduce (most powerful)
+//mathematical operations in the numbers 
+//reduce the array into one value
+//it takes a function and a starter value
+const pagesAllBooks = books.reduce((acc,book) => acc + book.pages ,0 )
+pagesAllBooks
+
+
+//sort method
+const x = [51,22,78,1,9,4].sort((a,b) => b -a )
+x
+const sortedBooks = books.slice().sort((a,b) => a.pages - b.pages)
+sortedBooks
+
+//working with immutable arrays 
+//we dont manipulate the underlying data structure
+
+//add a book object to array 
+const newbook = {
+  id : 6,
+  title : "Harry potter and the chamber of secrets",
+  author : "j. k. Rowling"
+}
+const newBooksAfter = [...books,newbook]
+newBooksAfter
+
+//delete a book from the  array
+const newArr = newBooksAfter.filter((book) => book.id !== 3)
+newArr;
+
+
+//update a book object while in the array
+const bookAfterUpdate = newBooksAfter.map((book) => book.id === 1 ? {...book,pages : 1} : book)
+
+console.log(bookAfterUpdate)
+*/
+
+
+//Asynchronous Javascript 
+//promises 
+//then will be called as soon as the promise is fulfilled
+// fetch('https://jsonplaceholder.typicode.com/todos').then((res) => res.json()).then((data) => console.log(data))
+
+
+async function getTodos(){
+  const res = await fetch("https://jsonplaceholder.typicode.com/todos");
+  const data = await res.json()
+  console.log(data)
+
+}
+
+getTodos()
+console.log('jonas')
+
