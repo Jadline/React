@@ -40,7 +40,7 @@ function App(){
     setShowAddFriend(false)
   }
   function handleSplitBill(value){
-    console.log(value)
+    setFriends((friends) => friends.map((friend) => friend.id === selectedfriend?.id ? {...friend,balance : friend.balance + value } : friend))
   }
   return(
     <div className="app">
