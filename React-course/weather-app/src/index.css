@@ -1,0 +1,157 @@
+* {
+  margin : 0;
+  padding : 0;
+  box-sizing : border-box;
+}
+.container {
+  display : flex;
+  margin-left : 30px;
+  margin-top : 30px;
+  
+  
+  
+}
+.sidebar {
+  background-color : black;
+  
+  width : 400px;
+  /* height : 550px; */
+ 
+  
+
+}
+.sidebar-container {
+  display : flex;
+  flex-direction : column;
+  align-items : center;
+  justify-content : center;
+  width : 100%;
+  padding-inline : 20px;
+  padding-block : 20px;
+  
+  
+}
+
+.background {
+  /* background-color : black; */
+  background-image : url("background.jpeg");
+  width : 600px;
+  height : 550px;
+  background-size : cover;
+  background-position: center;
+  /* margin : 0 auto; */
+  
+}
+.city-name {
+  font-size : 70px;
+  Color : #fff;
+  display : flex;
+  justify-content : flex-end;
+  margin-right : 10px;
+  margin-top : 15px;
+}
+.time {
+  Color : #fff;
+  font-size : 40px;
+  padding-top : 350px;
+  margin-left : 20px;
+ 
+}
+.date-string {
+  Color : #fff;
+  font-size : 30px;
+  margin-left : 20px;
+}
+.cloud-icon {
+  width : 100px;
+  height : 100px;
+  color : #fff;
+}
+.location-name {
+  Color : #fff;
+  font-size : 25px;
+  text-transform : uppercase;
+
+}
+.img-content {
+  display : flex;
+  flex-direction : column;
+  align-items : center;
+  justify-content : center;
+  margin-bottom : 30px;
+}
+.weather-info {
+  Color : #fff;
+}
+.city {
+  font-size : 25px;
+  color : #fff;
+  margin-bottom : 20px;
+  padding-bottom : 10px;
+  
+  width :170px;
+  text-align : center;
+  /* position : relative; */
+}
+/* .city ::after{
+  content : "";
+  height : 80px;
+  width : 100px;
+  background-color : #fff;
+  display : block;
+  position : absolute;
+  bottom : 0;
+  left : 0;
+  
+} */
+ .weather-info p:first-child{
+  border-top : 2px solid gray;
+ }
+#search-city {
+  color : white;
+  background-color: transparent;
+  outline : none;
+  border : none;
+}
+.search-field {
+   display : flex;
+   margin-bottom :20px;
+   border-bottom : 2px solid gray;
+   padding : 12px;
+   width : 200px;
+   
+}
+.search-field input {
+  font-size : 18px;
+}
+.search-field button {
+  width : 24px;
+  height : 24px;
+  background-color : transparent;
+  border-radius : 50%;
+  border : 1px solid #fff;
+  font-size : 20px;
+}
+.weather-info p {
+  display : flex;
+  justify-content : space-between;
+  align-items : center;
+  padding-top : 10px;
+  padding-bottom : 15px;
+  border-bottom : 2px solid gray;
+  width : 250px;
+  font-size : 20px;
+  
+
+}
+.type-city-message {
+  color : #fff;
+  font-size : 18px;
+  display : flex;
+  align-items : center;
+  justify-content : center;
+  margin-top : 15px;
+}
+
+  
+/* https://api.openweathermap.org/data/2.5/weather?q={city name}&appid={API key} */
