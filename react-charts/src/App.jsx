@@ -1,35 +1,18 @@
-// import Line from "./Components/line"
-// // import BarGraph from './Components/bar'
-// // import PieGraph from './Components/pie'
+import HorizontalBarChart from "./Components/D3barCharts/barchartOne";
+import AvailabilityStatusPie from "./D3js/AvailabilityPie";
+import BrandPie from "./D3js/BrandPie";
+import PieChart from "./D3js/PieChart";
+import SalesPie from "./D3js/Sales";
 
-// function App() {
- 
-//   return(
-//     <div className='app'>
-//       <Line/>
-//       {/* <BarGraph/> */}
-//       {/* <PieGraph/> */}
-//     </div>
-//   )
-// }
-
-// export default App
-const data = [
-    { x: 1, y: 50 },
-    { x: 2, y: 80 },
-    { x: 3, y: 65 },
-    { x: 4, y: 90 },
-    { x: 5, y: 100 }
-];
-
-import LineChart from './D3JS/linechart'
-function App() {
- 
+function App(){
   return(
-    <div>
-      <LineChart data ={data}/>
+    // <PieChart/>
+    <div className='container'>
+      {/* <SalesPie/> */}
+      {/* <BrandPie/> */}
+      {/* <AvailabilityStatusPie/> */}
+      <HorizontalBarChart/>
     </div>
   )
 }
-
 export default App

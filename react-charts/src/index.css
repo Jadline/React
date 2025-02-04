@@ -4,3 +4,8 @@
     width : 50vw;
     color : #fff;
 }
+.container {
+    display : flex;
+    gap : 1rem;
+    justify-content : space-between;
+}
