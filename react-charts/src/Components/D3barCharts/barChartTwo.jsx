@@ -79,7 +79,7 @@ function PopulationChart(){
             x2 ={xScale(value)}
             y1 = {0}
             y2 = {innerHeight}
-            stroke={"#808080"}
+            stroke={"#060101"}
             strokeWidth ={1}
             opacity={0.6}
             />

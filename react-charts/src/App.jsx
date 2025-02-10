@@ -1,6 +1,9 @@
 import NamesBar from "./Components/D3barCharts/barChart3";
 import HorizontalBarChart from "./Components/D3barCharts/barchartOne";
 import PopulationChart from "./Components/D3barCharts/barChartTwo";
+import DonutOne from "./Components/D3donuts/donut1";
+import LineChart from "./Components/D3LineChart/LineOne";
+import LineTwo from "./Components/D3LineChart/LineTwo";
 import AvailabilityStatusPie from "./D3js/AvailabilityPie";
 import BrandPie from "./D3js/BrandPie";
 import PieChart from "./D3js/PieChart";
@@ -24,10 +27,13 @@ function App(){
     // <PieChart/>
     <div className='container'>
       {/* <SalesPie/> */}
+      {/* <DonutOne/> */}
+      {/* <LineChart/> */}
+      <LineTwo/>
       {/* <BrandPie/> */}
       {/* <AvailabilityStatusPie/> */}
       {/* <HorizontalBarChart/> */}
-      <PopulationChart/>
+      {/* <PopulationChart/> */}
       {/* <NamesBar data ={data}/> */}
     </div>
   )
