@@ -33,7 +33,7 @@ function LineTwo() {
 
     const yScale = scaleLinear()
         .domain([0, max(data, (d) => d.temperature)])
-        .range([innerHeight,0]);
+        .range([innerHeight,0]); // Flip the range
 
     const xAxisGrid = xScale.ticks(5).map((value, i) => (
         <g key={i} transform={`translate(${xScale(value)},0)`}>
@@ -63,7 +63,7 @@ function LineTwo() {
                 {xAxisGrid}
                 {yAxisGrid}
                 <path d={lineGenerator(data)} stroke={"black"} fill="none" strokeWidth={2} />
-                {data.map((d, i) => (
+                {/* {data.map((d, i) => (
                     <circle
                         key={i}
                         cx={xScale(d.timestamp)}
@@ -71,7 +71,7 @@ function LineTwo() {
                         r={4}
                         fill={"steelblue"}
                     />
-                ))}
+                ))} */}
             </g>
         </svg>
     );
