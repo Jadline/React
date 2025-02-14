@@ -1,0 +1,62 @@
+{
+    "type": "FeatureCollection",
+    "features": [
+      {
+        "type": "Feature",
+        "properties": { "NAME": "China" },
+        "geometry": {
+          "type": "Polygon",
+          "coordinates": [[[104.1954, 35.8617]]]
+        }
+      },
+      {
+        "type": "Feature",
+        "properties": { "NAME": "South Africa" },
+        "geometry": {
+          "type": "Polygon",
+          "coordinates": [[[22.9375, -30.5595]]]
+        }
+      },
+      {
+        "type": "Feature",
+        "properties": { "NAME": "Netherlands" },
+        "geometry": {
+          "type": "Polygon",
+          "coordinates": [[[5.2913, 52.1326]]]
+        }
+      },
+      {
+        "type": "Feature",
+        "properties": { "NAME": "Turkey" },
+        "geometry": {
+          "type": "Polygon",
+          "coordinates": [[[35.2433, 38.9637]]]
+        }
+      },
+      {
+        "type": "Feature",
+        "properties": { "NAME": "United Arab Emirates" },
+        "geometry": {
+          "type": "Polygon",
+          "coordinates": [[[53.8478, 23.4241]]]
+        }
+      },
+      {
+        "type": "Feature",
+        "properties": { "NAME": "United Kingdom" },
+        "geometry": {
+          "type": "Polygon",
+          "coordinates": [[[-3.4359, 55.3781]]]
+        }
+      },
+      {
+        "type": "Feature",
+        "properties": { "NAME": "Italy" },
+        "geometry": {
+          "type": "Polygon",
+          "coordinates": [[[12.5674, 41.8719]]]
+        }
+      }
+    ]
+  }
+  

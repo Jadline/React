@@ -33,7 +33,7 @@ function LineTwo() {
 
     const yScale = scaleLinear()
         .domain([0, max(data, (d) => d.temperature)])
-        .range([innerHeight,0]); // Flip the range
+        .range([innerHeight,0]); 
 
     const xAxisGrid = xScale.ticks(5).map((value, i) => (
         <g key={i} transform={`translate(${xScale(value)},0)`}>
