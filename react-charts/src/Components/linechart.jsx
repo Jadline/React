@@ -1,79 +1,72 @@
-import { useEffect, useRef } from "react";
-import * as d3 from "d3";
+import { scaleLinear, scaleTime, line, extent, timeFormat, timeParse, curveBasis } from "d3";
 
-const data = [
-  { date: "2024-01-01", air: 5, sea: 10 },
-  { date: "2024-02-01", air: 6, sea: 9 },
-  { date: "2024-03-01", air: 7, sea: 12 },
-  { date: "2024-04-01", air: 5.5, sea: 8 },
-  { date: "2024-05-01", air: 4, sea: 6 },
-];
+const MARGIN = { top: 50, right: 30, bottom: 50, left: 60 };
+const width = 700;
+const height = 400;
 
-function ChartLinw() {
-  const svgRef = useRef(null);
+const boundsWidth = width - MARGIN.left - MARGIN.right;
+const boundsHeight = height - MARGIN.top - MARGIN.bottom;
 
-  useEffect(() => {
-    const width = 600;
-    const height = 400;
-    const margin = { top: 30, right: 50, bottom: 40, left: 50 };
+const colors = { air: "#1f77b4", sea: "#ff7f0e" };
 
-    const svg = d3
-      .select(svgRef.current)
-      .attr("width", width)
-      .attr("height", height)
-      .style("overflow", "visible");
+function ChartLine({ data }) {
+  if (!data || data.length === 0) return <pre>Loading...</pre>;
 
-    const parseDate = d3.timeParse("%Y-%m-%d");
-    data.forEach(d => (d.date = parseDate(d.date)));
+  // Parse date using d3.timeParse
+  const parseDate = timeParse("%Y-%m-%d");
+  const parsedData = data.map((d) => ({
+    ...d,
+    date: parseDate(d.date),
+  }));
 
-    const xScale = d3
-      .scaleTime()
-      .domain(d3.extent(data, d => d.date))
-      .range([margin.left, width - margin.right]);
+  // X Scale (Time)
+  const xScale = scaleTime()
+    .domain(extent(parsedData, (d) => d.date))
+    .range([0, boundsWidth]);
 
-    const yScale = d3
-      .scaleLinear()
-      .domain([0, d3.max(data, d => Math.max(d.air, d.sea))])
-      .range([height - margin.bottom, margin.top]);
+  // Y Scale (Delivery Time)
+  const yScale = scaleLinear()
+    .domain([0, Math.max(...parsedData.map((d) => Math.max(d.air, d.sea)))]).nice()
+    .range([boundsHeight, 0]);
 
-    const lineGenerator = d3
-      .line()
-      .x(d => xScale(d.date))
-      .y(d => yScale(d.air))
-      .curve(d3.curveBasis);
+  // Line generators with smooth curves
+  const lineAir = line()
+    .x((d) => xScale(d.date))
+    .y((d) => yScale(d.air))
+    .curve(curveBasis);
 
-    const lineGeneratorSea = d3
-      .line()
-      .x(d => xScale(d.date))
-      .y(d => yScale(d.sea))
-      .curve(d3.curveBasis);
+  const lineSea = line()
+    .x((d) => xScale(d.date))
+    .y((d) => yScale(d.sea))
+    .curve(curveBasis);
 
-    svg.append("path")
-      .datum(data)
-      .attr("fill", "none")
-      .attr("stroke", "#9d174d")
-      .attr("stroke-width", 2)
-      .attr("d", lineGenerator);
+  // Grid lines
+  const grid = yScale.ticks(5).map((value, i) => (
+    <g key={i}>
+      <line x1={0} x2={boundsWidth} y1={yScale(value)} y2={yScale(value)} stroke="#808080" opacity={0.2} />
+      <text x={-10} y={yScale(value)} textAnchor="end" alignmentBaseline="middle" fontSize={10} fill="#808080">
+        {value}
+      </text>
+    </g>
+  ));
 
-    svg.append("path")
-      .datum(data)
-      .attr("fill", "none")
-      .attr("stroke", "#0077b6")
-      .attr("stroke-width", 2)
-      .attr("d", lineGeneratorSea);
+  // X-axis labels formatted as "Jan 2024", "Feb 2024"
+  const xLabels = xScale.ticks(5).map((date, i) => (
+    <text key={i} x={xScale(date)} y={boundsHeight + 25} textAnchor="middle" fontSize={10} fill="black">
+      {timeFormat("%b %Y")(date)}
+    </text>
+  ));
 
-    const xAxis = d3.axisBottom(xScale).ticks(5).tickFormat(d3.timeFormat("%b %Y"));
-    svg.append("g")
-      .attr("transform", `translate(0,${height - margin.bottom})`)
-      .call(xAxis);
-
-    const yAxis = d3.axisLeft(yScale);
-    svg.append("g")
-      .attr("transform", `translate(${margin.left},0)`)
-      .call(yAxis);
-  }, []);
-
-  return <svg ref={svgRef}></svg>;
+  return (
+    <svg width={width} height={height}>
+      <g transform={`translate(${MARGIN.left},${MARGIN.top})`}>
+        {grid}
+        <path d={lineAir(parsedData)} fill="none" stroke={colors.air} strokeWidth={2} />
+        <path d={lineSea(parsedData)} fill="none" stroke={colors.sea} strokeWidth={2} />
+        {xLabels}
+      </g>
+    </svg>
+  );
 }
 
-export default ChartLinw;
+export default ChartLine;

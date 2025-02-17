@@ -14,6 +14,7 @@ import KPITrackingTable from "./Components/table";
 import VerticalBar from "./Components/D3barCharts/VerticalChart";
 import StackedBar from "./Components/D3barCharts/stackedBar";
 import ChartLine from "./Components/linechart";
+import Stocks from "./Components/D3LineChart/Stocks";
 const data = [
   {name:"Mark", value: 90},
   {name:"Robert", value: 12},
@@ -44,6 +45,38 @@ const timedata = [
   { date: "2024-05-01", air: 4, sea: 6 },
 ];
 
+const stocksdata = [
+  {
+    "date": "2024-07-31",
+    "openPrice": 548.34,
+    "closePrice": 560.78
+  },
+  {
+    "date": "2024-08-31",
+    "openPrice": 730.12,
+    "closePrice": 715.50
+  },
+  {
+    "date": "2024-09-30",
+    "openPrice": 990.87,
+    "closePrice": 980.45
+  },
+  {
+    "date": "2024-10-31",
+    "openPrice": 865.22,
+    "closePrice": 890.15
+  },
+  {
+    "date": "2024-11-30",
+    "openPrice": 672.80,
+    "closePrice": 660.30
+  },
+  {
+    "date": "2024-12-31",
+    "openPrice": 749.10,
+    "closePrice": 760.65
+  }
+]
 
 
 
@@ -60,7 +93,8 @@ function App(){
       {/* <Map/> */}
       {/* <VerticalBar data ={data}/> */}
       {/* <StackedBar data={stackeddata}/> */}
-      <ChartLine data={timedata}/>
+      {/* <ChartLine data={timedata}/> */}
+      <Stocks data={stocksdata}/>
       {/* <KPITrackingTable/> */}
       {/* <BrandPie/> */}
       {/* <AvailabilityStatusPie/> */}
