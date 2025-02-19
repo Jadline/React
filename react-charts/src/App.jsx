@@ -15,6 +15,8 @@ import VerticalBar from "./Components/D3barCharts/VerticalChart";
 import StackedBar from "./Components/D3barCharts/stackedBar";
 import ChartLine from "./Components/linechart";
 import Stocks from "./Components/D3LineChart/Stocks";
+import GroupedBar from "./Components/D3barCharts/GroupedBar";
+import MonthlyBar from "./Components/D3barCharts/groupedbarone";
 const data = [
   {name:"Mark", value: 90},
   {name:"Robert", value: 12},
@@ -77,6 +79,23 @@ const stocksdata = [
     "closePrice": 760.65
   }
 ]
+const monthlydata = [
+  { name: "John", month: "Jan", air: 30, sea: 20 },
+  { name: "John", month: "Feb", air: 45, sea: 25 },
+  { name: "John", month: "Mar", air: 50, sea: 30 },
+  
+  { name: "Jane", month: "Jan", air: 40, sea: 15 },
+  { name: "Jane", month: "Feb", air: 35, sea: 20 },
+  { name: "Jane", month: "Mar", air: 55, sea: 35 },
+
+  { name: "Mike", month: "Jan", air: 25, sea: 30 },
+  { name: "Mike", month: "Feb", air: 30, sea: 40 },
+  { name: "Mike", month: "Mar", air: 40, sea: 50 },
+
+  { name: "Alice", month: "Jan", air: 20, sea: 25 },
+  { name: "Alice", month: "Feb", air: 30, sea: 35 },
+  { name: "Alice", month: "Mar", air: 35, sea: 45 },
+];
 
 
 
@@ -93,8 +112,10 @@ function App(){
       {/* <Map/> */}
       {/* <VerticalBar data ={data}/> */}
       {/* <StackedBar data={stackeddata}/> */}
+      {/* <GroupedBar data={stackeddata}/> */}
+      <MonthlyBar data ={monthlydata}/>
       {/* <ChartLine data={timedata}/> */}
-      <Stocks data={stocksdata}/>
+      {/* <Stocks data={stocksdata}/> */}
       {/* <KPITrackingTable/> */}
       {/* <BrandPie/> */}
       {/* <AvailabilityStatusPie/> */}

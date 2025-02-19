@@ -14,7 +14,8 @@ const boundsWidth = width - MARGIN.left - MARGIN.right;
 const boundsHeight = height - MARGIN.top - MARGIN.bottom;
 
 const colors = { openPrice: "#124971", closePrice: "#ff7f0e" };
-function Stocks (data){
+function Stocks ({data}){
+    if(!data) return <pre>Loading....</pre>
     // const [stockdata,setStockdata] = useState(null)
 
     // useEffect(() => {
@@ -60,7 +61,7 @@ const parseDate = timeParse('%Y-%m-%d')
 const parseData = data.map((d) => (
     {
         ...d,
-        date : parseDate(d.date)
+        date : parseDate(d.date) || new Date(d.date)
     }
 ))
 const xScale = scaleTime()
@@ -71,12 +72,12 @@ const yScale = scaleLinear()
                 .nice()
                 .range([boundsHeight, 0]);
 const closePriceLine = line()
-.x((d) => d.date)
-.y((d) => d.closePrice)
+.x((d) => xScale(d.date))
+.y((d) => yScale(d.closePrice))
 .curve(curveBasis)
 const openPriceLine = line()
-.x((d) => d.date)
-.y((d) => d.openPrice)
+.x((d) => xScale(d.date))
+.y((d) => yScale(d.openPrice))
 .curve(curveBasis)
 
 const gridLines = yScale.ticks().map((value,index) => (
@@ -88,10 +89,11 @@ const gridLines = yScale.ticks().map((value,index) => (
         y2 ={yScale(value)}
         stroke={'gray'
         }
+        opacity ={0.2}
         strokeWidth ={2}
         />
         <text
-        x ={-10}
+        x ={-35}
         y ={yScale(value)}
         fill={'#000'}
         >
@@ -99,17 +101,17 @@ const gridLines = yScale.ticks().map((value,index) => (
         </text>
     </g>
 ))
-const xAxis = xScale().ticks.map((date,i) => (
-    <text key ={i} x={xScale(date)} y ={boundsWidth + 20} textAnchor={"middle"} >
+const xAxis = xScale.ticks().map((date,i) => (
+    <text key ={i} x={xScale(date)} y ={boundsHeight + 20} textAnchor={"middle"} >
         {timeFormat('%b %Y')(date)}
     </text>
 ))
     return (
         <svg width ={width} height={height}>
-            <g transform={`translate(${centerX},${centerY})`}>
+            <g transform={`translate(${MARGIN.left},${MARGIN.top})`}>
                     {gridLines}
-                    <path d={closePriceLine(parseData)} fill={colors.closePrice}/>
-                    <path d ={openPriceLine(parseData)} fill={colors.openPrice}/>
+                    <path d={closePriceLine(parseData)} fill={'none'} stroke={colors.closePrice}/>
+                    <path d ={openPriceLine(parseData)} fill={'none'} stroke={colors.openPrice}/>
                     {xAxis}
             </g>
 

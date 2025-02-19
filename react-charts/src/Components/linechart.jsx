@@ -1,4 +1,4 @@
-import { scaleLinear, scaleTime, line, extent, timeFormat, timeParse, curveBasis } from "d3";
+import { scaleLinear, scaleTime, line, extent,max, timeFormat, timeParse, curveBasis } from "d3";
 
 const MARGIN = { top: 50, right: 30, bottom: 50, left: 60 };
 const width = 700;
@@ -26,7 +26,7 @@ function ChartLine({ data }) {
 
   // Y Scale (Delivery Time)
   const yScale = scaleLinear()
-    .domain([0, Math.max(...parsedData.map((d) => Math.max(d.air, d.sea)))]).nice()
+    .domain([0,max(parsedData, (d) => Math.max(d.air, d.sea))]).nice()
     .range([boundsHeight, 0]);
 
   // Line generators with smooth curves
@@ -43,7 +43,7 @@ function ChartLine({ data }) {
   // Grid lines
   const grid = yScale.ticks(5).map((value, i) => (
     <g key={i}>
-      <line x1={0} x2={boundsWidth} y1={yScale(value)} y2={yScale(value)} stroke="#808080" opacity={0.2} />
+      <line x1={0} x2={boundsWidth} y1={yScale(value)} y2={yScale(value)} stroke="#808080" opacity={0.4} />
       <text x={-10} y={yScale(value)} textAnchor="end" alignmentBaseline="middle" fontSize={10} fill="#808080">
         {value}
       </text>

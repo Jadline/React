@@ -1,6 +1,6 @@
-import { max, scaleBand, scaleLinear, stack } from "d3";
+import { max, scaleBand, scaleLinear } from "d3";
 
-const MARGIN = { top: 30, right: 30, bottom: 50, left: 50 }; // Increased bottom margin for labels
+const MARGIN = { top: 30, right: 30, bottom: 50, left: 50 }; 
 const BAR_PADDING = 0.3;
 const width = 700;
 const height = 400;
@@ -11,23 +11,28 @@ const boundsHeight = height - MARGIN.top - MARGIN.bottom;
 const categories = ["air", "sea"];
 const colors = { air: "#1f77b4", sea: "#ff7f0e" };
 
-function StackedBar({ data }) {
+function GroupedBar({ data }) {
   if (!data) return <pre>Loading...</pre>;
 
   const groups = data.map((d) => d.name);
 
-  const xScale = scaleBand().domain(groups).range([0, boundsWidth]).padding(BAR_PADDING);
-  const yScale = scaleLinear()                                                                                       
-    .domain([0, max(data, (d) => d.air + d.sea) || 10])
+  // Define main x-axis scale
+  const xScale = scaleBand().domain(groups).range([0, boundsWidth]).padding(0.2);
+
+  // Define a sub-group scale to position "air" and "sea" within each group
+  const xScaleSubgroup = scaleBand().domain(categories).range([0, xScale.bandwidth()]).padding(0.05);
+
+  const yScale = scaleLinear()
+    .domain([0, max(data, (d) => Math.max(d.air, d.sea)) || 10])
     .range([boundsHeight, 0]);
 
-  const stackedData = stack().keys(categories)(data);
-
-  const allBars = stackedData.map((category, i) =>
-    category.map((d, j) => {
-      const x = xScale(d.data.name);
-      const y = yScale(d[1]);
-      const height = yScale(d[0]) - yScale(d[1]);
+  // Bars
+  const allBars = data.flatMap((d, i) =>
+    categories.map((category, j) => {
+      const x = xScale(d.name) + xScaleSubgroup(category);
+      const y = yScale(d[category]);
+      const barHeight = boundsHeight - y;
+      
 
       if (x === undefined) return null;
 
@@ -36,21 +41,23 @@ function StackedBar({ data }) {
           <rect
             x={x}
             y={y}
-            width={xScale.bandwidth()}
-            height={height}
-            fill={colors[category.key]}
+            width={xScaleSubgroup.bandwidth()}
+            height={barHeight}
+            fill={colors[category]}
             stroke={"white"}
+           
           />
-          {height > 15 && (
+          
+          {barHeight > 15 && (
             <text
-              x={x + xScale.bandwidth() / 2}
-              y={y + height / 2}
+              x={x + xScaleSubgroup.bandwidth() / 2}
+              y={y + barHeight / 2}
               textAnchor="middle"
               alignmentBaseline="middle"
               fontSize={12}
               fill="white"
             >
-              {d[1] - d[0]}
+              {d[category]}
             </text>
           )}
         </g>
@@ -85,7 +92,7 @@ function StackedBar({ data }) {
       <text
         key={i}
         x={x + xScale.bandwidth() / 2}
-        y={boundsHeight + 20} // Positioning below the bars
+        y={boundsHeight + 20}
         textAnchor="middle"
         alignmentBaseline="middle"
         fontSize={12}
@@ -107,4 +114,4 @@ function StackedBar({ data }) {
   );
 }
 
-export default StackedBar;
+export default GroupedBar;
